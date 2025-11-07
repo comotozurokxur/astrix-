@@ -1,0 +1,51 @@
+{
+  "name": "ᴀsᴛʀɪx Pʀɪᴍᴇ",
+  "version": "1.0.0",
+  "description": "ᴀsᴛʀɪx Pʀɪᴍᴇ WhatsApp Bot",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+       "@whiskeysockets/baileys": "github:kiuur/baileys",
+    "express": "^5.0.1",
+    "fs-extra": "^11.3.0",
+    "node-fetch": "^3.3.2",
+     "node-gtts": "2.0.2",
+    "pino": "^9.5.0",
+    "jimp": "^0.16.1",
+    "@octokit/rest": "20.0.2",
+    "@dark-yasiya/yt-dl.js": "1.0.5",
+    "denethdev-ytmp3": "1.0.3",
+    "yt-search": "2.12.1",
+    "axios": "^1.7.7",
+    "moment-timezone": "^0.6.0",
+    "cheerio": "^1.1.2",
+    "canvas": "latest",
+     "ytdl-core": "^4.11.5",
+    "@distube/ytdl-core": "^4.11.3",
+    "wa-sticker-formatter": "^4.4.4",
+    "form-data": "latest",
+    "ffmpeg": "^0.0.4",
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
+    "child_process": "^1.0.2",
+    "path": "^0.12.7",
+    "qrcode": "^1.5.3",
+    "file-type": "21.0.0",
+    "fs": "0.0.1-security"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=9.x"
+  },
+  "keywords": [
+    "whatsapp",
+    "bot",
+    "multi-device",
+    "baileys",
+    "ᴀsᴛʀɪx Pʀɪᴍᴇ"
+  ],
+  "author": "ROMEK-XD",
+  "license": "MIT"
+}

@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ASTRIX-PRIME Bot - Home</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #0a0a0f;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    .bg-gradient {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 20% 50%, rgba(120, 40, 200, 0.15) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 80%, rgba(40, 120, 200, 0.15) 0%, transparent 50%),
+                  radial-gradient(circle at 40% 40%, rgba(200, 40, 120, 0.15) 0%, transparent 50%),
+                  #0a0a0f;
+      z-index: 0;
+    }
+
+    .stars {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 3s infinite;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+
+    .container {
+      position: relative;
+      z-index: 10;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      animation: slideDown 0.8s ease;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      font-size: 28px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-logo i {
+      font-size: 35px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    .hero {
+      text-align: center;
+      padding: 100px 20px;
+      animation: fadeInUp 1s ease;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero h1 {
+      font-size: 72px;
+      font-weight: 800;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.2;
+    }
+
+    .hero .tagline {
+      font-size: 24px;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 40px;
+      font-weight: 300;
+    }
+
+    .hero .description {
+      font-size: 18px;
+      color: rgba(255, 255, 255, 0.6);
+      max-width: 700px;
+      margin: 0 auto 50px;
+      line-height: 1.6;
+    }
+
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 18px 40px;
+      font-size: 18px;
+      font-weight: 600;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: inherit;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      box-shadow: 0 10px 40px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 50px rgba(102, 126, 234, 0.6);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-5px);
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin: 80px 0;
+      animation: fadeIn 1.2s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .feature-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 40px;
+      backdrop-filter: blur(20px);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .feature-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      border-color: rgba(102, 126, 234, 0.5);
+      box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
+    }
+
+    .feature-icon {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      margin-bottom: 25px;
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+    }
+
+    .feature-card h3 {
+      font-size: 24px;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .feature-card p {
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 40px;
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    .stat-item h2 {
+      font-size: 52px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+    }
+
+    .stat-item p {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 18px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 50px 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: 80px;
+    }
+
+    footer p {
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 48px;
+      }
+
+      .hero .tagline {
+        font-size: 20px;
+      }
+
+      .hero .description {
+        font-size: 16px;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        flex-direction: column;
+        gap: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-gradient"></div>
+  <div class="stars" id="stars"></div>
+
+  <div class="container">
+    <nav>
+      <div class="nav-logo">
+        <i class="fas fa-bolt"></i>
+        <span>ASTRIX-PRIME</span>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <h1>ASTRIX-PRIME</h1>
+      <p class="tagline">Next-Generation WhatsApp Bot</p>
+      <p class="description">
+        Experience the power of automation with our advanced WhatsApp bot. 
+        Multi-device support, auto features, and seamless integration - all without deployment.
+      </p>
+      <div class="cta-buttons">
+        <a href="/pair" class="btn btn-primary">
+          <i class="fas fa-rocket"></i>
+          Get Started
+        </a>
+        <a href="#features" class="btn btn-secondary">
+          <i class="fas fa-info-circle"></i>
+          Learn More
+        </a>
+      </div>
+    </section>
+
+    <section class="stats">
+      <div class="stat-item">
+        <h2>24/7</h2>
+        <p>Active Support</p>
+      </div>
+      <div class="stat-item">
+        <h2>100%</h2>
+        <p>Secure & Private</p>
+      </div>
+      <div class="stat-item">
+        <h2>Fast</h2>
+        <p>Lightning Speed</p>
+      </div>
+    </section>
+
+    <section class="features" id="features">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-mobile-alt"></i>
+        </div>
+        <h3>Multi-Device Support</h3>
+        <p>Connect multiple WhatsApp numbers simultaneously with our advanced session management system.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-bolt"></i>
+        </div>
+        <h3>Auto Features</h3>
+        <p>Automated status viewing, reactions, and smart responses to keep you connected 24/7.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-shield-alt"></i>
+        </div>
+        <h3>Secure & Reliable</h3>
+        <p>File-based session management ensures your data stays secure and private at all times.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-code"></i>
+        </div>
+        <h3>Easy Pairing</h3>
+        <p>Simple pairing code system - no complex setup required. Just enter your number and go!</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-cogs"></i>
+        </div>
+        <h3>Customizable</h3>
+        <p>Custom commands, bot names, and logos. Make it truly yours with our flexible configuration.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-rocket"></i>
+        </div>
+        <h3>No Deployment</h3>
+        <p>Start instantly without any deployment. Generate your pair code and you're ready to go!</p>
+      </div>
+    </section>
+
+    <footer>
+      <p>© 2025 ASTRIX-PRIME Bot | Made with ❤️ by ASTRIX-PRIME</p>
+    </footer>
+  </div>
+
+  <script>
+    function createStars() {
+      const starsContainer = document.getElementById('stars');
+      const starCount = 100;
+
+      for (let i = 0; i < starCount; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.left = Math.random() * 100 + '%';
+        star.style.top = Math.random() * 100 + '%';
+        star.style.animationDelay = Math.random() * 3 + 's';
+        star.style.animationDuration = (2 + Math.random() * 2) + 's';
+        starsContainer.appendChild(star);
+      }
+    }
+
+    createStars();
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

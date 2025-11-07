@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>Login - ASTRIX-PRIME Bot</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #0a0a0f;
+      color: white;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .bg-gradient {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 30% 40%, rgba(102, 126, 234, 0.15) 0%, transparent 60%),
+                  radial-gradient(circle at 70% 70%, rgba(118, 75, 162, 0.15) 0%, transparent 60%),
+                  #0a0a0f;
+      z-index: 0;
+    }
+
+    .glow-orb {
+      position: fixed;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.3;
+      z-index: 1;
+      animation: float 20s infinite ease-in-out;
+    }
+
+    .orb-1 {
+      top: -200px;
+      left: -200px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      animation-delay: 0s;
+    }
+
+    .orb-2 {
+      bottom: -200px;
+      right: -200px;
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      animation-delay: -10s;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translate(0, 0) scale(1);
+      }
+      33% {
+        transform: translate(50px, -50px) scale(1.1);
+      }
+      66% {
+        transform: translate(-50px, 50px) scale(0.9);
+      }
+    }
+
+    .container {
+      position: relative;
+      z-index: 10;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 480px;
+      background: rgba(20, 20, 30, 0.7);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 30px;
+      padding: 50px 40px;
+      box-shadow: 0 20px 80px rgba(0, 0, 0, 0.5);
+      position: relative;
+      overflow: hidden;
+      animation: slideIn 0.6s ease;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #667eea, #764ba2, transparent);
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .logo-container {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 25px;
+      position: relative;
+    }
+
+    .logo-ring {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 3px solid transparent;
+      border-top-color: #667eea;
+      border-right-color: #764ba2;
+      border-radius: 50%;
+      animation: spin 3s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .logo {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 42px;
+      color: white;
+      box-shadow: 0 10px 40px rgba(102, 126, 234, 0.4);
+    }
+
+    .title {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.6);
+      font-weight: 400;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 30px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 8px;
+      border-radius: 12px;
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      background: transparent;
+      color: rgba(255, 255, 255, 0.6);
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      font-family: inherit;
+    }
+
+    .tab-btn.active {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: 500;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .input-wrapper {
+      position: relative;
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 18px;
+    }
+
+    .input {
+      width: 100%;
+      padding: 16px 20px 16px 55px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      color: white;
+      font-size: 15px;
+      font-family: inherit;
+      transition: all 0.3s ease;
+    }
+
+    .input:focus {
+      outline: none;
+      border-color: #667eea;
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+    }
+
+    .input::placeholder {
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .btn {
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(102, 126, 234, 0.5);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    .btn-github {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      margin-bottom: 20px;
+    }
+
+    .btn-github:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin: 25px 0;
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 14px;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .form-content {
+      display: none;
+    }
+
+    .form-content.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .toggle-text {
+      text-align: center;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.6);
+      margin-top: 20px;
+    }
+
+    .toggle-text a {
+      color: #667eea;
+      text-decoration: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .toggle-text a:hover {
+      color: #764ba2;
+    }
+
+    .error-message {
+      background: rgba(255, 107, 107, 0.1);
+      border: 1px solid rgba(255, 107, 107, 0.3);
+      color: #ff6b6b;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      margin-bottom: 15px;
+      display: none;
+    }
+
+    .error-message.show {
+      display: block;
+    }
+
+    .success-message {
+      background: rgba(0, 212, 170, 0.1);
+      border: 1px solid rgba(0, 212, 170, 0.3);
+      color: #00d4aa;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      margin-bottom: 15px;
+      display: none;
+    }
+
+    .success-message.show {
+      display: block;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 30px;
+      padding-top: 25px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .footer-text {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .footer-link {
+      color: #667eea;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-link:hover {
+      color: #764ba2;
+    }
+
+    @media (max-width: 580px) {
+      .card {
+        padding: 40px 25px;
+        border-radius: 25px;
+      }
+
+      .title {
+        font-size: 28px;
+      }
+
+      .logo-container {
+        width: 85px;
+        height: 85px;
+      }
+
+      .logo {
+        font-size: 36px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-gradient"></div>
+  <div class="glow-orb orb-1"></div>
+  <div class="glow-orb orb-2"></div>
+
+  <div class="container">
+    <div class="card">
+      <div class="header">
+        <div class="logo-container">
+          <div class="logo-ring"></div>
+          <div class="logo">
+            <i class="fas fa-bolt"></i>
+          </div>
+        </div>
+        <h1 class="title">ASTRIX-PRIME</h1>
+        <p class="subtitle">Secure Authentication</p>
+      </div>
+
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="login">
+          <i class="fas fa-sign-in-alt"></i> Login
+        </button>
+        <button class="tab-btn" data-tab="register">
+          <i class="fas fa-user-plus"></i> Register
+        </button>
+      </div>
+
+      <!-- Login Form -->
+      <div class="form-content active" id="login-form">
+        <div class="error-message" id="login-error"></div>
+        <div class="success-message" id="login-success"></div>
+
+        <form id="loginForm">
+          <div class="form-group">
+            <label class="label">Email Address</label>
+            <div class="input-wrapper">
+              <input 
+                type="email" 
+                id="loginEmail" 
+                class="input" 
+                placeholder="your@email.com"
+                required
+              >
+              <i class="fas fa-envelope input-icon"></i>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="label">Password</label>
+            <div class="input-wrapper">
+              <input 
+                type="password" 
+                id="loginPassword" 
+                class="input" 
+                placeholder="••••••••"
+                required
+              >
+              <i class="fas fa-lock input-icon"></i>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary" id="loginBtn">
+            <i class="fas fa-sign-in-alt"></i>
+            Sign In
+          </button>
+        </form>
+
+        <div class="divider">or</div>
+
+        <button class="btn btn-github" id="githubLoginBtn">
+          <i class="fab fa-github"></i>
+          Continue with GitHub
+        </button>
+
+        <div class="toggle-text">
+          Don't have an account? <a onclick="switchTab('register')">Register here</a>
+        </div>
+      </div>
+
+      <!-- Register Form -->
+      <div class="form-content" id="register-form">
+        <div class="error-message" id="register-error"></div>
+        <div class="success-message" id="register-success"></div>
+
+        <form id="registerForm">
+          <div class="form-group">
+            <label class="label">Full Name</label>
+            <div class="input-wrapper">
+              <input 
+                type="text" 
+                id="registerName" 
+                class="input" 
+                placeholder="John Doe"
+                required
+              >
+              <i class="fas fa-user input-icon"></i>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="label">Email Address</label>
+            <div class="input-wrapper">
+              <input 
+                type="email" 
+                id="registerEmail" 
+                class="input" 
+                placeholder="your@email.com"
+                required
+              >
+              <i class="fas fa-envelope input-icon"></i>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="label">Password</label>
+            <div class="input-wrapper">
+              <input 
+                type="password" 
+                id="registerPassword" 
+                class="input" 
+                placeholder="••••••••"
+                required
+              >
+              <i class="fas fa-lock input-icon"></i>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="label">Confirm Password</label>
+            <div class="input-wrapper">
+              <input 
+                type="password" 
+                id="registerConfirmPassword" 
+                class="input" 
+                placeholder="••••••••"
+                required
+              >
+              <i class="fas fa-lock input-icon"></i>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary" id="registerBtn">
+            <i class="fas fa-user-plus"></i>
+            Create Account
+          </button>
+        </form>
+
+        <div class="divider">or</div>
+
+        <button class="btn btn-github" id="githubRegisterBtn">
+          <i class="fab fa-github"></i>
+          Sign up with GitHub
+        </button>
+
+        <div class="toggle-text">
+          Already have an account? <a onclick="switchTab('login')">Login here</a>
+        </div>
+      </div>
+
+      <div class="footer">
+        <p class="footer-text">
+          © 2025 ASTRIX-PRIME | <a href="/" class="footer-link">Back to Home</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const formContents = document.querySelectorAll('.form-content');
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+    const githubLoginBtn = document.getElementById('githubLoginBtn');
+    const githubRegisterBtn = document.getElementById('githubRegisterBtn');
+
+    // Tab switching
+    function switchTab(tabName) {
+      tabBtns.forEach(btn => btn.classList.remove('active'));
+      formContents.forEach(form => form.classList.remove('active'));
+      
+      document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+      document.getElementById(`${tabName}-form`).classList.add('active');
+    }
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        switchTab(btn.dataset.tab);
+      });
+    });
+
+    // Show error message
+    function showError(formType, message) {
+      const errorEl = document.getElementById(`${formType}-error`);
+      errorEl.textContent = message;
+      errorEl.classList.add('show');
+      setTimeout(() => errorEl.classList.remove('show'), 5000);
+    }
+
+    // Show success message
+    function showSuccess(formType, message) {
+      const successEl = document.getElementById(`${formType}-success`);
+      successEl.textContent = message;
+      successEl.classList.add('show');
+      setTimeout(() => successEl.classList.remove('show'), 5000);
+    }
+
+    // Login form submission
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+
+      try {
+        const response = await fetch('/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          showSuccess('login', 'Login successful! Redirecting...');
+          setTimeout(() => window.location.href = '/dashboard', 1500);
+        } else {
+          showError('login', data.message || 'Login failed');
+        }
+      } catch (error) {
+        showError('login', 'An error occurred. Please try again.');
+      }
+    });
+
+    // Register form submission
+    registerForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('registerName').value;
+      const email = document.getElementById('registerEmail').value;
+      const password = document.getElementById('registerPassword').value;
+      const confirmPassword = document.getElementById('registerConfirmPassword').value;
+
+      if (password !== confirmPassword) {
+        showError('register', 'Passwords do not match');
+        return;
+      }
+
+      try {
+        const response = await fetch('/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, password })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          showSuccess('register', 'Account created! Redirecting to login...');
+          setTimeout(() => switchTab('login'), 1500);
+        } else {
+          showError('register', data.message || 'Registration failed');
+        }
+      } catch (error) {
+        showError('register', 'An error occurred. Please try again.');
+      }
+    });
+
+    // GitHub OAuth
+    githubLoginBtn.addEventListener('click', () => {
+      window.location.href = '/auth/github';
+    });
+
+    githubRegisterBtn.addEventListener('click', () => {
+      window.location.href = '/auth/github?action=register';
+    });
+  </script>
+</body>
+</html>
